@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<package>
+  <metadata>
+    <id>NewRelic.Synthetics.Api</id>
+    <version>1.0.0</version>
+    <authors>Anton Kuryan</authors>
+    <owners>Anton Kuryan</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>
+      NewRelic.Synthetics.Api - MsBuild target and accompanying code to work with NewRelic Synthetics API (disable/enable Synthetics monitors during deployment)
+    </description>
+    <projectUrl>https://github.com/akuryan/MsBuild.Targets</projectUrl>
+    <copyright>Copyright 2018</copyright>
+    <tags>MsBuild, NewRelic</tags>
+    <language>en-US</language>
+    <!-- NuGet package dependency -->
+    <dependencies>
+      <!--<dependency id="Microsoft.Owin" version="(3.0,4.0)" />
+      <dependency id="Microsoft.Owin.FileSystems" version="(3.0,4.0)" />
+      <dependency id="Microsoft.Owin.StaticFiles" version="(3.0,4.0)" />
+      <dependency id="Owin" version="1.0" />-->
+    </dependencies>
+  </metadata>
+  <!-- Example of explicit file inclusion -->
+  <files>
+    <!--<file src="bin\Release\LetsEncrypt.Umbraco.dll" target="lib\net45" />
+    <file src="bin\Release\LetsEncrypt.Umbraco.pdb" target="lib\net45" />
+    <file src="**\*.cs" target="src" />
+    <file src="readme.txt" target="" />
+    <file src="*.xdt" target="content" />-->
+  </files>
+</package>
