@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Net;
     using System.Threading;
 
     using NewRelic.Synthetics.Api.Data;
@@ -44,7 +45,7 @@
                 response = client.Execute<T>(request);
             }
 
-            return response.Data;
+            return response.StatusCode == HttpStatusCode.OK ? response.Data : new T();
         }
 
         public List<Monitors> GetMonitors()
