@@ -15,10 +15,7 @@
     <language>en-US</language>
     <!-- NuGet package dependency -->
     <dependencies>
-      <!--<dependency id="Microsoft.Owin" version="(3.0,4.0)" />
-      <dependency id="Microsoft.Owin.FileSystems" version="(3.0,4.0)" />
-      <dependency id="Microsoft.Owin.StaticFiles" version="(3.0,4.0)" />
-      <dependency id="Owin" version="1.0" />-->
+      <dependency id="RestSharp" version="106.2.1" />
     </dependencies>
   </metadata>
   <!-- Example of explicit file inclusion -->
