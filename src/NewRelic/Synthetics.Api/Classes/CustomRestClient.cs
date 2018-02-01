@@ -4,7 +4,7 @@
 
     using RestSharp;
 
-    public class CustomRestClient
+    public static class CustomRestClient
     {
         internal static RestClient CreateClient(string baseUrl)
         {

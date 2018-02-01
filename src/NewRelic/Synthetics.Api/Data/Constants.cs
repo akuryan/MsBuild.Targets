@@ -1,6 +1,6 @@
 ﻿namespace NewRelic.Synthetics.Api.Data
 {
-    public class Constants
+    public static class Constants
     {
         /// <summary>
         /// Base URL for New Relic Synthetics API

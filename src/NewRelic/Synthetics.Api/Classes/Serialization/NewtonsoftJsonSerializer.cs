@@ -9,6 +9,7 @@
     public class NewtonsoftJsonSerializer : Serialization.IJsonSeriliazer
     {
         private readonly Newtonsoft.Json.JsonSerializer serializer;
+        private string contentType;
 
         public NewtonsoftJsonSerializer(Newtonsoft.Json.JsonSerializer serializer)
         {
@@ -17,9 +18,13 @@
 
         public string ContentType
         {
-            get { return "application/json"; }
+            get
+            {
+                return !string.IsNullOrWhiteSpace(this.contentType) ? this.contentType : "application/json";
+            }
             set
             {
+                this.contentType = value;
             }
         }
 
@@ -53,7 +58,7 @@
 
         public string RootElement { get; set; }
 
-        public static NewtonsoftJsonSerializer Default => new NewtonsoftJsonSerializer(new Newtonsoft.Json.JsonSerializer()
+        public static NewtonsoftJsonSerializer Default => new NewtonsoftJsonSerializer(new Newtonsoft.Json.JsonSerializer
         {
             NullValueHandling = NullValueHandling.Ignore
         });

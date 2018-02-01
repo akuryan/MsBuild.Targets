@@ -1,5 +1,6 @@
 ﻿namespace NewRelic.Synthetics.Api.Classes.ApiProxies
 {
+    using System.Linq;
     using System.Net;
     using System.Threading;
 
@@ -46,6 +47,11 @@
         {
             var request = new RestRequest();
             return Execute<SyntheticsJsonRoot>(request);
+        }
+
+        public Classes.Monitor GetMonitorByName(string name)
+        {
+            return this.GetMonitors().Monitors.FirstOrDefault(monitor => monitor.Name.Equals(name));
         }
     }
 }
