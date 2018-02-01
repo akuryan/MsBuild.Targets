@@ -51,7 +51,7 @@
 
         public Classes.Monitor GetMonitorByName(string name)
         {
-            return this.GetAllMonitors().Monitors.FirstOrDefault(monitor => monitor.Name.Equals(name));
+            return string.IsNullOrWhiteSpace(name) ? null : this.GetAllMonitors().Monitors.FirstOrDefault(monitor => monitor.Name.Equals(name));
         }
     }
 }

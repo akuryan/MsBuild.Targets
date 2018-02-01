@@ -1,6 +1,12 @@
 ﻿namespace NewRelic.Synthetics.Api.Monitors
 {
+    using System.Linq;
+
     using Microsoft.Build.Framework;
+
+    using NewRelic.Synthetics.Api.Classes;
+    using NewRelic.Synthetics.Api.Classes.ApiProxies;
+    using NewRelic.Synthetics.Api.Data;
 
     /// <summary>
     /// Gets all NewRelic Synthetics monitors and enables/disables them
@@ -28,9 +34,48 @@
         {
             var changeAllMonitors = string.IsNullOrWhiteSpace(MonitorsNamesCollection);
 
+            var monitorRetriver = new GetMonitors(SyntheticsApiKey);
+            var monitorUpdater = new UpdateMonitor(SyntheticsApiKey);
 
+            var monitorsCollection = changeAllMonitors ? monitorRetriver.GetAllMonitors() : GetNamedMonitors(monitorRetriver, MonitorsNamesCollection);
+
+            if (!monitorsCollection.Monitors.Any())
+            {
+                Log.LogMessage(MessageImportance.High, "Could not retrieve any monitors for given set of parameters");
+                return false;
+            }
+
+            foreach (var monitor in monitorsCollection.Monitors)
+            {
+                var updateStaus = monitorUpdater.Execute(monitor, EnableMonitors);
+                if (!updateStaus)
+                {
+                    //failure encountered during monitor update
+                    Log.LogError("Could change monitor {0} to status {1}", monitor.Name, EnableMonitors ? Constants.MonitorEnabled : Constants.MonitorDisabled);
+                }
+            }
 
             return true;
+        }
+
+        private static SyntheticsJsonRoot GetNamedMonitors(GetMonitors monitorRetriver, string monitorsNamesCollection)
+        {
+            var monitorNames = monitorsNamesCollection.Split(new[] { ',' });
+
+            var monitorsArray = new Monitor[monitorNames.Length];
+
+            for (var counter = 0; counter < monitorNames.Length; counter++)
+            {
+                monitorsArray[counter] = monitorRetriver.GetMonitorByName(monitorNames[counter]);
+            }
+
+            var monitorsCollection = new SyntheticsJsonRoot
+            {
+                Count = monitorNames.Length,
+                Monitors = monitorsArray
+            };
+
+            return monitorsCollection;
         }
     }
 }
