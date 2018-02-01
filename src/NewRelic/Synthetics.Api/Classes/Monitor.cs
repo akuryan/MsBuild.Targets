@@ -2,39 +2,86 @@
 
 namespace NewRelic.Synthetics.Api.Classes
 {
+    using System.Runtime.Serialization;
+
     using NewRelic.Synthetics.Api.Data;
 
-    using RestSharp.Deserializers;
+    using Newtonsoft.Json;
 
-    public class Monitor
+    public class MonitorBase
     {
-        [DeserializeAs(Name = "id")]
-        public string Id { get; set; }
-        [DeserializeAs(Name = "name")]
+        [JsonProperty("name")]
         public string Name { get; set; }
-        [DeserializeAs(Name = "type")]
+
+        [JsonProperty("type")]
         public string Type { get; set; }
-        [DeserializeAs(Name = "frequency")]
+
+        [JsonProperty("frequency")]
         public int Frequency { get; set; }
-        [DeserializeAs(Name = "uri")]
+
+        [JsonProperty("uri")]
         public string Uri { get; set; }
-        [DeserializeAs(Name = "locations")]
+
+        [JsonProperty("locations")]
         public string[] Locations { get; set; }
-        [DeserializeAs(Name = "status")]
+
+        [JsonProperty("status")]
         public string Status { get; set; }
-        [DeserializeAs(Name = "slaThreshold")]
+
+        [JsonProperty("slaThreshold")]
         public double SlaThreshold { get; set; }
-        [DeserializeAs(Name = "options")]
+    }
+
+    public class Monitor : MonitorBase
+    {
+        [JsonProperty("id")]
+        public string Id { get; set; }
+
+        public bool ShouldSerializeId()
+        {
+            return false;
+        }
+
+        [JsonProperty("options")]
         public Options Options { get; set; }
-        [DeserializeAs(Name = "modifiedAt")]
+
+        public bool ShouldSerializeOptions()
+        {
+            return false;
+        }
+
+        [JsonProperty("modifiedAt")]
         public DateTime ModifiedAt { get; set; }
-        [DeserializeAs(Name = "createdAt")]
+
+        public bool ShouldSerializeModifiedAt()
+        {
+            return false;
+        }
+
+        [JsonProperty("createdAt")]
         public DateTime CreatedAt { get; set; }
-        [DeserializeAs(Name = "userId")]
+
+        public bool ShouldSerializeCreatedAt()
+        {
+            return false;
+        }
+
+        [JsonProperty("userId")]
         public int UserId { get; set; }
-        [DeserializeAs(Name = "apiVersion")]
+
+        public bool ShouldSerializeUserId()
+        {
+            return false;
+        }
+
+        [JsonProperty("apiVersion")]
         public string ApiVersion { get; set; }
 
+        public bool ShouldSerializeApiVersion()
+        {
+            return false;
+        }
+        [IgnoreDataMember]
         public bool IsEnabled => this.Status.Equals(Constants.MonitorEnabled, StringComparison.InvariantCultureIgnoreCase);
     }
 }
