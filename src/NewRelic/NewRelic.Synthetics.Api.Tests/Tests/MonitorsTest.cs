@@ -13,7 +13,7 @@
     {
         private string apiKey;
         private SyntheticsJsonRoot monitorsCollection;
-        private GetAllMonitors monitorRetriver;
+        private GetMonitors monitorRetriver;
 
 
         [SetUp]
@@ -21,7 +21,7 @@
         {
             var appSettingKey = ConfigurationManager.AppSettings.Get("ApiKey");
             this.apiKey = !string.IsNullOrWhiteSpace(appSettingKey) ? appSettingKey : string.Empty;
-            monitorRetriver = new GetAllMonitors(this.apiKey);
+            monitorRetriver = new GetMonitors(this.apiKey);
             this.monitorsCollection = this.monitorRetriver.GetMonitors();
         }
 

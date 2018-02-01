@@ -56,7 +56,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Classes\ApiProxies\GetAllMonitors.cs" />
+    <Compile Include="Classes\ApiProxies\GetMonitors.cs" />
     <Compile Include="Classes\ApiProxies\UpdateMonitor.cs" />
     <Compile Include="Classes\CustomRestClient.cs" />
     <Compile Include="Classes\Monitor.cs" />

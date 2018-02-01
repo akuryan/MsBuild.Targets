@@ -26,6 +26,10 @@
 
         public override bool Execute()
         {
+            var changeAllMonitors = string.IsNullOrWhiteSpace(MonitorsNamesCollection);
+
+
+
             return true;
         }
     }

@@ -8,7 +8,7 @@
 
     using RestSharp;
 
-    public class GetAllMonitors
+    public class GetMonitors
     {
         /// <summary>
         /// Base URL which we are calling to work with monitors
@@ -22,7 +22,7 @@
         /// Working with particular monitor
         /// </summary>
         /// <param name="apiKey"></param>
-        public GetAllMonitors(string apiKey)
+        public GetMonitors(string apiKey)
         {
             this.adminApiKey = apiKey;
         }
