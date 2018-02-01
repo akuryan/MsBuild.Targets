@@ -2,6 +2,8 @@
 
 namespace NewRelic.Synthetics.Api.Classes
 {
+    using NewRelic.Synthetics.Api.Data;
+
     using RestSharp.Deserializers;
 
     public class Monitor
@@ -32,5 +34,7 @@ namespace NewRelic.Synthetics.Api.Classes
         public int UserId { get; set; }
         [DeserializeAs(Name = "apiVersion")]
         public string ApiVersion { get; set; }
+
+        public bool IsEnabled => this.Status.Equals(Constants.MonitorEnabled, StringComparison.InvariantCultureIgnoreCase);
     }
 }

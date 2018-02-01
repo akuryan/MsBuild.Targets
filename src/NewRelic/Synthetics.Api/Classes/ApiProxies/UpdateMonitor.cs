@@ -25,28 +25,30 @@
         /// New Relic Synthetics Admin API key
         /// </summary>
         private readonly string adminApiKey;
-        private readonly Classes.Monitor monitor;
 
         /// <summary>
         /// Working with particular monitor
         /// </summary>
         /// <param name="apiKey"></param>
-        /// <param name="monitor"></param>
-        /// <param name="enableMonitor"></param>
-        public UpdateMonitor(string apiKey, Classes.Monitor monitor, bool enableMonitor)
+        public UpdateMonitor(string apiKey)
         {
             this.adminApiKey = apiKey;
-            this.monitor = monitor;
-            //change monitor status
-            this.monitor.Status = enableMonitor ? Constants.MonitorEnabled : Constants.MonitorDisabled;
         }
-
-        public bool Execute(RestRequest request)
+        /// <summary>
+        /// Tries to change Synthetics monitor status 
+        /// </summary>
+        /// <param name="monitor"><see cref="SyntheticsJsonRoot.Monitors"/> class</param>
+        /// <param name="enableMonitor">Boolean to which status we are moving monitor</param>
+        /// <returns></returns>
+        public bool Execute(Classes.Monitor monitor, bool enableMonitor)
         {
+            var request = new RestRequest();
             var client = new RestClient
             {
-                BaseUrl = new Uri(string.Concat(this.baseUrl, this.monitor.Id))
+                BaseUrl = new Uri(string.Concat(this.baseUrl, monitor.Id))
             };
+            //change monitor status
+            monitor.Status = enableMonitor ? Constants.MonitorEnabled : Constants.MonitorDisabled;
             request.AddHeader(Constants.ApiKeyHeader, this.adminApiKey);
             request.AddHeader(ContentTypeHeader, ContentTypeHeaderValue);
             request.JsonSerializer = NewtonsoftJsonSerializer.Default;
@@ -54,6 +56,12 @@
             request.Method = Method.PUT;
 
             var response = client.Execute(request);
+            while (response.StatusCode.Equals(429))
+            {
+                //we hit rate limit and must wait for 1 second
+                Thread.Sleep(1000);
+                response = client.Execute(request);
+            }
 
             return response.StatusCode.Equals(HttpStatusCode.NoContent);
         }
