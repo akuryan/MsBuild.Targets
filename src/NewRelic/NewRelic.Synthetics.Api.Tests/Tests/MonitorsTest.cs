@@ -22,7 +22,7 @@
             var appSettingKey = ConfigurationManager.AppSettings.Get("ApiKey");
             this.apiKey = !string.IsNullOrWhiteSpace(appSettingKey) ? appSettingKey : string.Empty;
             monitorRetriver = new GetMonitors(this.apiKey);
-            this.monitorsCollection = this.monitorRetriver.GetMonitors();
+            this.monitorsCollection = this.monitorRetriver.GetAllMonitors();
         }
 
         [Test]
@@ -36,12 +36,12 @@
         {
             ChangeMonitorsStatus(this.monitorsCollection, false);
 
-            var updatedMonitorsCollection = this.monitorRetriver.GetMonitors();
+            var updatedMonitorsCollection = this.monitorRetriver.GetAllMonitors();
             Assert.IsFalse(CheckAllMonitorsStatus(updatedMonitorsCollection));
 
             ChangeMonitorsStatus(this.monitorsCollection, true);
 
-            updatedMonitorsCollection = this.monitorRetriver.GetMonitors();
+            updatedMonitorsCollection = this.monitorRetriver.GetAllMonitors();
             Assert.IsTrue(CheckAllMonitorsStatus(updatedMonitorsCollection));
 
         }

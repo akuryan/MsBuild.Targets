@@ -43,7 +43,7 @@
             return response.StatusCode == HttpStatusCode.OK ? response.Data : new T();
         }
 
-        public SyntheticsJsonRoot GetMonitors()
+        public SyntheticsJsonRoot GetAllMonitors()
         {
             var request = new RestRequest();
             return Execute<SyntheticsJsonRoot>(request);
@@ -51,7 +51,7 @@
 
         public Classes.Monitor GetMonitorByName(string name)
         {
-            return this.GetMonitors().Monitors.FirstOrDefault(monitor => monitor.Name.Equals(name));
+            return this.GetAllMonitors().Monitors.FirstOrDefault(monitor => monitor.Name.Equals(name));
         }
     }
 }
