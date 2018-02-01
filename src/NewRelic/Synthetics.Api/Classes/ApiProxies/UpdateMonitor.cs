@@ -4,6 +4,7 @@
     using System.Net;
     using System.Threading;
 
+    using NewRelic.Synthetics.Api.Classes.Serialization;
     using NewRelic.Synthetics.Api.Data;
 
     using RestSharp;
@@ -48,6 +49,7 @@
             };
             request.AddHeader(Constants.ApiKeyHeader, this.adminApiKey);
             request.AddHeader(ContentTypeHeader, ContentTypeHeaderValue);
+            request.JsonSerializer = NewtonsoftJsonSerializer.Default;
             request.AddJsonBody(monitor);
             request.Method = Method.PUT;
 

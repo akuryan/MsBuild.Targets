@@ -4,14 +4,6 @@ namespace NewRelic.Synthetics.Api.Classes
 {
     using RestSharp.Deserializers;
 
-    public class SyntheticsJsonRoot
-    {
-        [DeserializeAs(Name = "monitors")]
-        public Monitor[] Monitors { get; set; }
-        [DeserializeAs(Name = "count")]
-        public int Count { get; set; }
-    }
-
     public class Monitor
     {
         [DeserializeAs(Name = "id")]
@@ -29,7 +21,7 @@ namespace NewRelic.Synthetics.Api.Classes
         [DeserializeAs(Name = "status")]
         public string Status { get; set; }
         [DeserializeAs(Name = "slaThreshold")]
-        public int SlaThreshold { get; set; }
+        public double SlaThreshold { get; set; }
         [DeserializeAs(Name = "options")]
         public Options Options { get; set; }
         [DeserializeAs(Name = "modifiedAt")]
@@ -41,9 +33,4 @@ namespace NewRelic.Synthetics.Api.Classes
         [DeserializeAs(Name = "apiVersion")]
         public string ApiVersion { get; set; }
     }
-
-    public class Options
-    {
-    }
-
 }

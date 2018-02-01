@@ -23,6 +23,7 @@
         {
             var monitorsCollection = new GetAllMonitors(this.apiKey).GetMonitors();
             Assert.IsTrue(monitorsCollection.Monitors.Any());
+            Assert.IsTrue(monitorsCollection.Count > 0);
         }
     }
 }

@@ -7,6 +7,8 @@
 
     using NewRelic.Synthetics.Api.Data;
 
+    using Newtonsoft.Json;
+
     using RestSharp;
 
     public class GetAllMonitors
@@ -30,10 +32,7 @@
 
         public T Execute<T>(RestRequest request) where T : new()
         {
-            var client = new RestClient
-            {
-                BaseUrl = new Uri(this.baseUrl)
-            };
+            var client = CustomRestClient.CreateClient(this.baseUrl);
             request.AddHeader(Constants.ApiKeyHeader, this.adminApiKey);
 
             var response = client.Execute<T>(request);
@@ -44,7 +43,6 @@
                 Thread.Sleep(1000);
                 response = client.Execute<T>(request);
             }
-            
             return response.StatusCode == HttpStatusCode.OK ? response.Data : new T();
         }
 
