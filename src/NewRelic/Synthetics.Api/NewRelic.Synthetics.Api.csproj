@@ -60,6 +60,7 @@
     <Compile Include="Classes\ApiProxies\UpdateMonitor.cs" />
     <Compile Include="Classes\CustomRestClient.cs" />
     <Compile Include="Classes\Monitor.cs" />
+    <Compile Include="Classes\MonitorBase.cs" />
     <Compile Include="Classes\Options.cs" />
     <Compile Include="Classes\Serialization\NewtonsoftJsonSerializer.cs" />
     <Compile Include="Classes\Serialization\Serialization.cs" />
