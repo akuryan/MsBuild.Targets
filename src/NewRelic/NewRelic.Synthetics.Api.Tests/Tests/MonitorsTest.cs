@@ -1,5 +1,6 @@
 ﻿namespace NewRelic.Synthetics.Api.Tests.Tests
 {
+    using System;
     using System.Configuration;
     using System.Linq;
 
@@ -43,6 +44,28 @@
             updatedMonitorsCollection = this.monitorRetriver.GetMonitors();
             Assert.IsTrue(CheckAllMonitorsStatus(updatedMonitorsCollection));
 
+        }
+
+        /// <summary>
+        /// Randomly changes one of monitors status
+        /// </summary>
+        [Test]
+        public void ChangeMonitorStatus()
+        {
+            var index = new Random().Next(this.monitorsCollection.Count -  1);
+            var monitor = this.monitorsCollection.Monitors[index];
+
+            var currentStatus = monitor.IsEnabled;
+            var monitorUpdater = new UpdateMonitor(this.apiKey);
+            //change monitor status to another
+            monitorUpdater.Execute(monitor, !currentStatus);
+            monitor = this.monitorRetriver.GetMonitorByName(monitor.Name);
+            Assert.IsFalse(currentStatus.Equals(monitor.IsEnabled));
+            //revert back
+            currentStatus = monitor.IsEnabled;
+            monitorUpdater.Execute(monitor, !currentStatus);
+            monitor = this.monitorRetriver.GetMonitorByName(monitor.Name);
+            Assert.IsFalse(currentStatus.Equals(monitor.IsEnabled));
         }
 
         private static bool CheckAllMonitorsStatus(SyntheticsJsonRoot monitorsCollection)
