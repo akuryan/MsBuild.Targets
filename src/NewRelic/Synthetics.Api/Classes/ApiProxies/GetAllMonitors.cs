@@ -1,13 +1,9 @@
 ﻿namespace NewRelic.Synthetics.Api.Classes.ApiProxies
 {
-    using System;
-    using System.Collections.Generic;
     using System.Net;
     using System.Threading;
 
     using NewRelic.Synthetics.Api.Data;
-
-    using Newtonsoft.Json;
 
     using RestSharp;
 
