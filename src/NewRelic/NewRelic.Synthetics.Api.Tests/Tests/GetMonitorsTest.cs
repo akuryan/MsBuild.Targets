@@ -21,8 +21,8 @@
         [Test]
         public void GetAllMonitorsTest()
         {
-            var monitors = new GetAllMonitors(this.apiKey).GetMonitors();
-            Assert.IsTrue(monitors.Any());
+            var monitorsCollection = new GetAllMonitors(this.apiKey).GetMonitors();
+            Assert.IsTrue(monitorsCollection.Monitors.Any());
         }
     }
 }

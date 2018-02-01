@@ -24,7 +24,7 @@
         /// New Relic Synthetics Admin API key
         /// </summary>
         private readonly string adminApiKey;
-        private readonly Monitors monitor;
+        private readonly Classes.Monitor monitor;
 
         /// <summary>
         /// Working with particular monitor
@@ -32,7 +32,7 @@
         /// <param name="apiKey"></param>
         /// <param name="monitor"></param>
         /// <param name="enableMonitor"></param>
-        public UpdateMonitor(string apiKey, Monitors monitor, bool enableMonitor)
+        public UpdateMonitor(string apiKey, Classes.Monitor monitor, bool enableMonitor)
         {
             this.adminApiKey = apiKey;
             this.monitor = monitor;

@@ -44,14 +44,14 @@
                 Thread.Sleep(1000);
                 response = client.Execute<T>(request);
             }
-
+            
             return response.StatusCode == HttpStatusCode.OK ? response.Data : new T();
         }
 
-        public List<Monitors> GetMonitors()
+        public SyntheticsJsonRoot GetMonitors()
         {
             var request = new RestRequest();
-            return Execute<List<Monitors>>(request);
+            return Execute<SyntheticsJsonRoot>(request);
         }
     }
 }
