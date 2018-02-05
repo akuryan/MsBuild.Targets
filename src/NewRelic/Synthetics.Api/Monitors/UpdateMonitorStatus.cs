@@ -49,8 +49,8 @@
 
             foreach (var monitor in monitorsCollection.Monitors)
             {
-                var updateStaus = monitorUpdater.Execute(monitor, EnableMonitors);
-                if (!updateStaus)
+                var updateStatus = monitorUpdater.Execute(monitor, EnableMonitors);
+                if (!updateStatus)
                 {
                     //failure encountered during monitor update
                     Log.LogError("Could change monitor {0} to status {1}", monitor.Name, EnableMonitors ? Constants.MonitorEnabled : Constants.MonitorDisabled);
@@ -64,7 +64,7 @@
 
         private static SyntheticsJsonRoot GetNamedMonitors(GetMonitors monitorRetriver, string monitorsNamesCollection)
         {
-            var monitorNames = monitorsNamesCollection.Split(new[] { ',' });
+            var monitorNames = monitorsNamesCollection.Split(',');
 
             var monitorsArray = new Monitor[monitorNames.Length];
 
