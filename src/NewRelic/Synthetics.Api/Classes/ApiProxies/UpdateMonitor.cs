@@ -42,6 +42,18 @@
         /// <returns></returns>
         public bool Execute(Classes.Monitor monitor, bool enableMonitor)
         {
+            if (monitor == null)
+            {
+                //monitor is null
+                return false;
+            }
+
+            if (string.IsNullOrWhiteSpace(monitor.Id))
+            {
+                //monitor is constructed incorrectly
+                return false;
+            }
+
             var request = new RestRequest();
             var client = new RestClient
             {

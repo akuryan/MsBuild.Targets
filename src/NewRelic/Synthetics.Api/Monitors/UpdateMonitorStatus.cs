@@ -47,19 +47,28 @@
                 return false;
             }
 
-            foreach (var monitor in monitorsCollection.Monitors)
+
+            for (int counter = 0; counter < monitorsCollection.Count; counter++)
             {
+                var monitor = monitorsCollection.Monitors[counter];
+                var monitorName = !string.IsNullOrWhiteSpace(monitor.Name) ? monitor.Name : "UNRETRIEVABLE";
+                Log.LogMessage(MessageImportance.Low, "Updating monitor '{0}' to status '{1}'", monitorName, GetTargetStatus(EnableMonitors));
                 var updateStatus = monitorUpdater.Execute(monitor, EnableMonitors);
                 if (!updateStatus)
                 {
                     //failure encountered during monitor update
-                    Log.LogError("Could change monitor {0} to status {1}", monitor.Name, EnableMonitors ? Constants.MonitorEnabled : Constants.MonitorDisabled);
+                    Log.LogError("Could change monitor '{0}' to status '{1}'", monitorName, GetTargetStatus(EnableMonitors));
                 }
             }
 
             Log.LogMessage("Finished API operations", MessageImportance.Low);
 
             return true;
+        }
+
+        private string GetTargetStatus(bool enableMonitors)
+        {
+            return enableMonitors ? Constants.MonitorEnabled.ToUpperInvariant() : Constants.MonitorDisabled.ToUpperInvariant();
         }
 
         private static SyntheticsJsonRoot GetNamedMonitors(GetMonitors monitorRetriver, string monitorsNamesCollection)
@@ -70,7 +79,19 @@
 
             for (var counter = 0; counter < monitorNames.Length; counter++)
             {
-                monitorsArray[counter] = monitorRetriver.GetMonitorByName(monitorNames[counter]);
+                var monitor = monitorRetriver.GetMonitorByName(monitorNames[counter]);
+                if (monitor != null)
+                {
+                    monitorsArray[counter] = monitor;
+                }
+                else
+                {
+                    //we need a monitor name from setup to identify an error
+                    monitorsArray[counter] = new Monitor
+                    {
+                        Name = monitorNames[counter]
+                    };
+                }
             }
 
             var monitorsCollection = new SyntheticsJsonRoot
