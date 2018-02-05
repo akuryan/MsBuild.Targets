@@ -11,7 +11,7 @@
     </description>
     <projectUrl>https://github.com/akuryan/MsBuild.Targets</projectUrl>
     <copyright>Copyright 2018</copyright>
-    <tags>MsBuild, NewRelic</tags>
+    <tags>MsBuild target, NewRelic Synthetics api</tags>
     <language>en-US</language>
     <!-- NuGet package dependency -->
     <dependencies>
@@ -19,12 +19,10 @@
       <dependency id="Newtonsoft.Json" version="10.0.3" />
     </dependencies>
   </metadata>
-  <!-- Example of explicit file inclusion -->
   <files>
-    <!--<file src="bin\Release\LetsEncrypt.Umbraco.dll" target="lib\net45" />
-    <file src="bin\Release\LetsEncrypt.Umbraco.pdb" target="lib\net45" />
-    <file src="**\*.cs" target="src" />
-    <file src="readme.txt" target="" />
-    <file src="*.xdt" target="content" />-->
+    <file src="bin\Release\NewRelic.Synthetics.Api.dll" target="tools" />
+    <file src="bin\Release\RestSharp.dll" target="tools" />
+    <file src="bin\Release\Newtonsoft.Json.dll" target="tools" />
+    <file src="NewRelic.Synthetics.Api.targets" target="build" />
   </files>
 </package>

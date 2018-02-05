@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="StartStopMonitors" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <!-- This target is used to setup shared parameters between different configurations -->
+  <PropertyGroup>
+    <!-- If not specified explicitly, we'll search for DLL and other data in tools folder of nuget package -->
+    <NewRelicApiTasksRootPath Condition="'$(NewRelicApiTasksRootPath)' == ''">$(MSBuildThisFileDirectory)..\tools\</NewRelicApiTasksRootPath>
+    <!-- Setting up default value in MonitorNames if it is not defined -->
+    <MonitorNames Condition="'$(MonitorNames)' == ''"> </MonitorNames>
+  </PropertyGroup>
+
+  <!-- Our tasks is located in this assembly -->
+  <UsingTask TaskName="UpdateMonitorStatus" AssemblyFile="$(NewRelicApiTasksRootPath)NewRelic.Synthetics.Api.dll"/>
+
+  <Target Name="StartStopMonitors">
+    <!-- 
+    Target UpdateMonitorStatus expect to receive:
+    1) admin key in SyntheticsApiKey parameter
+    2) bool EnableMonitors, indicating, if monitors shall be enabled or disabled 
+    3)(**optional**) MonitorNames - comma-separated string of monitor names to work with (if you do not want to disable all minitors in account 
+    -->
+    <UpdateMonitorStatus SyntheticsApiKey="$(SyntheticsApiKey)" EnableMonitors="$(EnableMonitors)" MonitorsNamesCollection="$(MonitorNames)"/>
+  </Target>
+  
+  
+</Project>

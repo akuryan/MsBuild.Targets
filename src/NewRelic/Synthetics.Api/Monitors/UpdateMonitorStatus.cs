@@ -37,6 +37,8 @@
             var monitorRetriver = new GetMonitors(SyntheticsApiKey);
             var monitorUpdater = new UpdateMonitor(SyntheticsApiKey);
 
+            Log.LogMessage("Starting API operations", MessageImportance.Low);
+
             var monitorsCollection = changeAllMonitors ? monitorRetriver.GetAllMonitors() : GetNamedMonitors(monitorRetriver, MonitorsNamesCollection);
 
             if (!monitorsCollection.Monitors.Any())
@@ -54,6 +56,8 @@
                     Log.LogError("Could change monitor {0} to status {1}", monitor.Name, EnableMonitors ? Constants.MonitorEnabled : Constants.MonitorDisabled);
                 }
             }
+
+            Log.LogMessage("Finished API operations", MessageImportance.Low);
 
             return true;
         }

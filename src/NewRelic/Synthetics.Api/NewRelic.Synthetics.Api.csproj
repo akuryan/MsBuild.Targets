@@ -73,6 +73,7 @@
     <None Include="NewRelic.Synthetics.Api.nuspec">
       <SubType>Designer</SubType>
     </None>
+    <None Include="NewRelic.Synthetics.Api.targets" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
