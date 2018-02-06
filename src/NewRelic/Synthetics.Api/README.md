@@ -17,7 +17,7 @@ Could be used in a regular deployment as a standalone target with following modi
  <Target Name="DisableSyntheticsMonitors" BeforeTargets="BeforeBuild">
     <MSBuild Projects="$(MSBuildProjectFile)" Targets="StartStopMonitors" Properties="SyntheticsApiKey=$(SyntheticsApiKey);EnableMonitors=False"/>
  </Target>
- <Target Name="EnableSyntheticsMonitors" BeforeTargets="BeforeBuild">
+ <Target Name="EnableSyntheticsMonitors" AfterTargets="AfterBuild">
      <MSBuild Projects="$(MSBuildProjectFile)" Targets="StartStopMonitors" Properties="SyntheticsApiKey=$(SyntheticsApiKey);EnableMonitors=True"/>
  </Target>
 ```
@@ -37,7 +37,7 @@ Or invoke MsBuild task in your csproj directly:
  <Target Name="DisableSyntheticsMonitors" BeforeTargets="BeforeBuild">
    <UpdateMonitorStatus SyntheticsApiKey="$(SyntheticsApiKey)" EnableMonitors="False"/>
  </Target>
- <Target Name="EnableSyntheticsMonitors" BeforeTargets="BeforeBuild">
+ <Target Name="EnableSyntheticsMonitors" AfterTargets="AfterBuild">
     <UpdateMonitorStatus SyntheticsApiKey="$(SyntheticsApiKey)" EnableMonitors="True"/>
  </Target>
 
