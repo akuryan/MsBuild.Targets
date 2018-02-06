@@ -9,7 +9,7 @@
     <description>
       NewRelic.Synthetics.Api - MsBuild target and accompanying code to work with NewRelic Synthetics API (disable/enable Synthetics monitors during deployment)
     </description>
-    <projectUrl>https://github.com/akuryan/MsBuild.Targets</projectUrl>
+    <projectUrl>https://github.com/akuryan/MsBuild.Targets/tree/master/src/NewRelic/Synthetics.Api</projectUrl>
     <copyright>Copyright 2018</copyright>
     <tags>MsBuild target, NewRelic Synthetics api</tags>
     <language>en-US</language>
