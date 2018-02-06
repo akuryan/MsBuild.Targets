@@ -3,7 +3,7 @@ MsBuild targets for working with NewRelic Synthetics API (disable monitor before
 
 ## Usage
 
-Could be used in a regular deployment as a standalone target with following modifications to your web app csproj file:
+Could be used in a regular deployment as a standalone target with following modifications to your web app csproj file (after installation of Nuget package - https://www.nuget.org/packages/NewRelic.Synthetics.Api/ )
 
 ```xml
 <PropertyGroup>
