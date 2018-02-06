@@ -45,7 +45,7 @@ Or invoke MsBuild task in your csproj directly:
 
 Or use a Teamcity Metarunner from https://github.com/akuryan/Teamcity.Metarunners (when it will be published)
 
-#NewRelic.Synthetics.Api.Tests
+# NewRelic.Synthetics.Api.Tests
 Tests is dumb - add your api key to app.config and observe, that api requests to real new relic endpoints are working
 
 `src/NewRelic/NewRelic.Synthetics.Api.Tests/App.config` is ignored by command `git update-index --skip-worktree src/NewRelic/NewRelic.Synthetics.Api.Tests/App.config`, so, all changes there will be untracked.
